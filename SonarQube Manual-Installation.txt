@@ -48,6 +48,7 @@ postgres=# \l
 # mv sonarqube-9.9.5.90363 sonarqube
 # mkdir -p /var/sonarqube/data
 # mkdir -p /var/sonarqube/temp
+# chown -R sonarqube:sonarqube /var/sonarqube
 
 # vi sonarqube/conf/sonar.properties
 sonar.jdbc.username=sonarqube
