@@ -46,10 +46,14 @@ postgres=# \l
 # wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.5.90363.zip
 # unzip sonarqube-9.9.5.90363.zip
 # mv sonarqube-9.9.5.90363 sonarqube
+# mkdir -p /var/sonarqube/data
+# mkdir -p /var/sonarqube/temp
+
 # vi sonarqube/conf/sonar.properties
 sonar.jdbc.username=sonarqube
 sonar.jdbc.password=sonarqube
-sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+sonar.path.data=/var/sonarqube/data
+sonar.path.temp=/var/sonarqube/temp
 
 # useradd sonarqube
 # chown -R sonarqube:sonarqube /opt/sonarqube
@@ -66,7 +70,7 @@ Type=simple
 User=sonarqube
 Group=sonarqube
 PermissionsStartOnly=true
-ExecStart=/bin/nohup java -Xms32m -Xmx32m -Djava.net.preferIPv4Stack=true -jar /opt/sonarqube/lib/sonar-application-9.9.5.90363.jar
+ExecStart=/bin/nohup java -Xms128m -Xmx512m -Djava.net.preferIPv4Stack=true -jar /opt/sonarqube/lib/sonar-application-9.9.5.90363.jar
 StandardOutput=syslog
 LimitNOFILE=65536
 LimitNPROC=8192
@@ -79,6 +83,13 @@ WantedBy=multi-user.target
 # systemctl daemon-reload
 # systemctl enable sonarqube.service
 # systemctl start sonarqube.service
+# tail -f /opt/sonarqube/logs/sonar.log
+# systemctl status sonarqube
+# yum -y install net-tools
+# netstat - plant (check ports)
+
+
+#-----------------------------------------------------#-----------------------------------------------------#
 
 Bonus: (On a different t2.medium)
 - Nexus Installation
