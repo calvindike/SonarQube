@@ -79,3 +79,14 @@ WantedBy=multi-user.target
 # systemctl daemon-reload
 # systemctl enable sonarqube.service
 # systemctl start sonarqube.service
+
+Bonus: (On a different t2.medium)
+- Nexus Installation
+# cd /opt
+# yum -y install java-11-openjdk
+# wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+# tar -xvf latest-unix.tar.gz
+#  mv sonatype-work/ nexusdata
+#  mv nexus-3.68.1-02/ nexus
+#  cd nexus/bin
+#  ./nexus
