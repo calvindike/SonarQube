@@ -21,6 +21,10 @@ Installed using RedHat Enterprise Linux 9
 $ psql
 postgres=# CREATE DATABASE sonarqubedb;
 postgres=# CREATE USER sonarqube WITH ENCRYPTED PASSWORD 'sonarqube';
+
+# If you've created user without password or with wrong password, you can change password using command below. You can also delete user using DROP USER sonarqube;
+psql=# alter user <username> with encrypted password '<password>';
+
 postgres=# GRANT ALL PRIVILEGES ON DATABASE sonarqubedb TO sonarqube;
 postgres=# \l
                                                          List of databases
