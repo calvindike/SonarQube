@@ -1,11 +1,40 @@
 Installed using RedHat Enterprise Linux 9
 
+- Install Java and Postgres
+# yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm -y
+# yum repolist
+# yum update
+# yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+# yum -y install java-17-openjdk
+# ll /usr/lib/jvm
+# yum install postgresql16-server
+# /usr/pgsql-16/bin/postgresql-16-setup initdb
+# systemctl status postgresql-16
+# systemctl enable postgresql-16
+# systemctl start postgresql-16
+# systemctl status postgresql-16
+# yum install python3-pip
+# pip3 install psycopg-binary
+
 - Create SonarQube Database
 # su - postgres
 $ psql
 postgres=# CREATE DATABASE sonarqubedb;
 postgres=# CREATE USER sonarqube WITH ENCRYPTED PASSWORD 'sonarqube';
 postgres=# GRANT ALL PRIVILEGES ON DATABASE sonarqubedb TO sonarqube;
+postgres=# \l
+                                                         List of databases
+    Name     |  Owner   | Encoding | Locale Provider |   Collate   |    Ctype    | ICU Locale | ICU Rules |   Access privileges
+-------------+----------+----------+-----------------+-------------+-------------+------------+-----------+------------------------
+ postgres    | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           |
+ sonarqubedb | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | =Tc/postgres          +
+             |          |          |                 |             |             |            |           | postgres=CTc/postgres +
+             |          |          |                 |             |             |            |           | sonarqube=CTc/postgres
+ template0   | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | =c/postgres           +
+             |          |          |                 |             |             |            |           | postgres=CTc/postgres
+ template1   | postgres | UTF8     | libc            | en_US.UTF-8 | en_US.UTF-8 |            |           | =c/postgres           +
+             |          |          |                 |             |             |            |           | postgres=CTc/postgres
+(4 rows)
 
 - Download and install SonarQube
 
