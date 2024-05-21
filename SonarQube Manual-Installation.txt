@@ -1,0 +1,48 @@
+Installed using RedHat Enterprise Linux 9
+
+- Create SonarQube Database
+# su - postgres
+$ psql
+postgres=# CREATE DATABASE sonarqubedb;
+postgres=# CREATE USER sonarqube WITH ENCRYPTED PASSWORD 'sonarqube';
+postgres=# GRANT ALL PRIVILEGES ON DATABASE sonarqubedb TO sonarqube;
+
+- Download and install SonarQube
+
+# cd /opt
+# wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.5.90363.zip
+# unzip sonarqube-9.9.5.90363.zip
+# mv sonarqube-9.9.5.90363 sonarqube
+# vi sonarqube/conf/sonar.properties
+sonar.jdbc.username=sonarqube
+sonar.jdbc.password=sonarqube
+sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+
+# useradd sonarqube
+# chown -R sonarqube:sonarqube /opt/sonarqube
+
+
+- Setup SonarQube service
+# vi /etc/systemd/system/sonarqube.service
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=sonarqube
+Group=sonarqube
+PermissionsStartOnly=true
+ExecStart=/bin/nohup java -Xms32m -Xmx32m -Djava.net.preferIPv4Stack=true -jar /opt/sonarqube/lib/sonar-application-9.9.5.90363.jar
+StandardOutput=syslog
+LimitNOFILE=65536
+LimitNPROC=8192
+TimeoutStartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+# systemctl daemon-reload
+# systemctl enable sonarqube.service
+# systemctl start sonarqube.service
