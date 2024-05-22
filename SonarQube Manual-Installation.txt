@@ -94,13 +94,12 @@ WantedBy=multi-user.target
 ####################################################################################################################################################################################################################
 
 Bonus: (On a different t2.medium)
------------- Nexus Installation
+------------ Nexus Installation using Java 11
 # cd /opt
 # yum -y install java-11-openjdk
-# wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
-# tar -xvf latest-unix.tar.gz
--------------------------------------------------------------------------------ignore this line for now#  mv sonatype-work/ nexusdata
-#  mv nexus-3.68.1-02/ nexus
+# wget https://download.sonatype.com/nexus/3/nexus-3.68.1-02-java11-unix.tar.gz
+# tar -xvf nexus-3.68.1-02-java11-unix.tar.gz
+# mv nexus-3.68.1-02/ nexus
 # useradd nexus
 # vi /opt/nexus/bin/nexus.rc
 run_as_user="nexus"
