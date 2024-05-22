@@ -1,7 +1,7 @@
 ####################################################################################################################################################################################################################
 Installed using RedHat Enterprise Linux 9
 
-- Install Java and Postgres
+------------- Install Java and Postgres
 # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm -y
 # yum repolist
 # yum update
@@ -17,7 +17,7 @@ Installed using RedHat Enterprise Linux 9
 # yum install python3-pip
 # pip3 install psycopg-binary
 
-- Create SonarQube Database
+----------- Create SonarQube Database
 # su - postgres
 $ psql
 postgres=# CREATE DATABASE sonarqubedb;
@@ -41,7 +41,7 @@ postgres=# \l
              |          |          |                 |             |             |            |           | postgres=CTc/postgres
 (4 rows)
 
-- Download and install SonarQube
+------------------- Download and install SonarQube
 
 # cd /opt
 # wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.5.90363.zip
@@ -61,7 +61,7 @@ sonar.path.temp=/var/sonarqube/temp
 # chown -R sonarqube:sonarqube /opt/sonarqube
 
 
-- Setup SonarQube service
+----------------- Setup SonarQube service
 # vi /etc/systemd/system/sonarqube.service
 [Unit]
 Description=SonarQube service
@@ -94,7 +94,7 @@ WantedBy=multi-user.target
 ####################################################################################################################################################################################################################
 
 Bonus: (On a different t2.medium)
-- Nexus Installation
+------------ Nexus Installation
 # cd /opt
 # yum -y install java-11-openjdk
 # wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
@@ -107,7 +107,8 @@ run_as_user="nexus"
 # chown -R nexus:nexus /opt/nexus
 # chown -R nexus:nexus /opt/sonatype-work
 # ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
-- Setup Nexus service
+
+----------- Setup Nexus service
 # vi /etc/systemd/system/nexus.service
 [Unit]
 Description=nexus service
