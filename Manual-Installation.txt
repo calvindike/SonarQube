@@ -140,7 +140,7 @@ WantedBy=multi-user.target
 # cd /opt
 # wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.24/bin/apache-tomcat-10.1.24.tar.gz
 # mkdir /opt/tomcat
-# tar xvf apache-tomcat-8.5.61.tar.gz -C /opt/tomcat --strip-components=1
+# tar xvf apache-tomcat-10.1.24.tar.gz -C /opt/tomcat --strip-components=1
 # cd /opt/tomcat
 # chgrp -R tomcat conf
 # chmod g+rwx conf
